@@ -6,8 +6,6 @@ public class BlockState {
     private final static int BLOCK_ROWS = 3;
     private final static int BLOCK_COLUMNS = 3;
 
-    private boolean isLastButton;
-
     public int[][] blocksNumbers;
 
     public BlockState() {
@@ -58,15 +56,6 @@ public class BlockState {
         return sum % 2 == 0;
     }
 
-    public boolean isLastButton(int x, int y) {
-
-        return isLastButton;
-    }
-
-    public void setLastButton(boolean isLastButton) {
-        this.isLastButton = isLastButton;
-    }
-
     public void moveBlock(int num) {
         int i = 0, j = 0;
         for (int k = 0; k < BLOCK_COLUMNS; k++) {
@@ -101,5 +90,14 @@ public class BlockState {
                 blocksNumbers[i][j] = 0;
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) return false;
+        if (other == this) return true;
+        if (!(other instanceof BlockState)) return false;
+        BlockState otherMyClass = (BlockState) other;
+        return otherMyClass.blocksNumbers == this.blocksNumbers;
     }
 }

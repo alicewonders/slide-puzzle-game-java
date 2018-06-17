@@ -1,9 +1,13 @@
 package model;
 
+import view.SlidePuzzleView;
+
 import java.util.Collection;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SlidePuzzleModel {
+    private static SlidePuzzleView view = new SlidePuzzleView();
+
     private final Collection<IModelSubscriber> subscribers = new CopyOnWriteArrayList<>();
 
     private BlockState blockState;
@@ -26,6 +30,11 @@ public class SlidePuzzleModel {
         }
 
         this.blockState = blockState;
+    }
+
+    public void nextStep(int num) {
+        blockState.moveBlock(num);
+        notifySubscribers();
     }
 
     protected void notifySubscribers() {
