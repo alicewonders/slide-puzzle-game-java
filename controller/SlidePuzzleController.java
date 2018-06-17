@@ -21,8 +21,7 @@ public class SlidePuzzleController {
     }
 
     public void moveBlock(int num) {
-        BlockState bs = model.getBlockState();
-        bs.moveBlock(num);
+        model.nextStep(num);
     }
 
     public boolean checkWin() {
