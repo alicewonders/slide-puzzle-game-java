@@ -33,7 +33,6 @@ public class MainPanel extends JPanel implements IModelSubscriber {
             button.setVisible(false);
             String name = button.getText();
             controller.moveBlock(Integer.parseInt(name));
-            addBlocks();
             if (controller.checkWin()) {
                 JOptionPane.showMessageDialog(null, "YOU WIN!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
                 controller.startNewGame();
@@ -42,7 +41,7 @@ public class MainPanel extends JPanel implements IModelSubscriber {
         }
     }
 
-    public void addBlocks() {
+    private void addBlocks() {
         this.removeAll();
 
         BlockState blockState = model.getBlockState();
@@ -50,6 +49,7 @@ public class MainPanel extends JPanel implements IModelSubscriber {
             for (int j = 0; j < BLOCK_ROWS; j++) {
                 JButton block = new JButton(Integer.toString(blockState.blocksNumbers[i][j]));
                 block.setFocusable(false);
+                block.setFont(new Font("Courier New", Font.BOLD, 40));
                 this.add(block);
                 if (blockState.blocksNumbers[i][j] == 0) {
                     block.setVisible(false);
@@ -65,6 +65,7 @@ public class MainPanel extends JPanel implements IModelSubscriber {
     @Override
     public void modelChanged(SlidePuzzleModel model_) {
         model = model_;
+        addBlocks();
     }
 
 
